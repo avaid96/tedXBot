@@ -18,12 +18,13 @@ def getfirsttalk(page):
 
 
 
-keyword = raw_input("Search Video: ")
-url = "https://www.ted.com/search?cat=talks&per_page=12&q="
-word_add = ""
+
 def SearchTedx(entry):
 	'''input will be a search for a video and returns the url for the list of all 
 	based on input'''
+	keyword = raw_input("Search Video: ")
+	url = "https://www.ted.com/search?cat=talks&per_page=12&q="
+	word_add = ""
 	split_word = entry.split()
 	n = len(split_word)
 	word_add = split_word[0]
@@ -31,13 +32,8 @@ def SearchTedx(entry):
 	for i in range (1, int(n)):
 		word_add = word_add + "+"+split_word[i]
 
+	return word_add
+
+
+
 	
-
-	print (url)
-	print (word_add)
-	print (url + word_add)
-	print split_word[0]
-	print n
-
-
-SearchTedx(keyword)
