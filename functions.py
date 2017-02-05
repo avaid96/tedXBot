@@ -2,6 +2,7 @@ import requests
 import re
 from bs4 import BeautifulSoup
 from pprint import pprint
+import urllib2
 
 
 def getfirsttalk(page):
@@ -14,10 +15,6 @@ def getfirsttalk(page):
         parsedlinks.append(o['href'])
     parsedlinks = list(set(parsedlinks))
     return parsedlinks[0]
-
-
-
-
 
 def SearchTedx(entry):
 	'''input will be a search for a video and returns the url for the list of all 
@@ -34,6 +31,14 @@ def SearchTedx(entry):
 
 	return word_add
 
-
+def getFirstLink(URLstr):
+	'''
+	Return link to first video on the search page (URLstr)
+	eg input: https://www.ted.com/search?cat=talks&per_page=12&q=politics
+	'''
+	page = urllib2.urlopen(URLstr).read()
+	soup = BeautifulSoup(page,"html.parser")
+	x=soup.findAll("a","visible-url-link")
+	print x[0].text #do x[0].get('href') if you only want "/talks/..."
 
 	
