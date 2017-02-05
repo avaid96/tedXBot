@@ -39,6 +39,5 @@ def getFirstLink(URLstr):
 	page = urllib2.urlopen(URLstr).read()
 	soup = BeautifulSoup(page,"html.parser")
 	x=soup.findAll("a","visible-url-link")
-	print x[0].text #do x[0].get('href') if you only want "/talks/..."
-
+	return x[0].text #do x[0].get('href') if you only want "/talks/..."
 	
