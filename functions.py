@@ -27,9 +27,9 @@ def SearchTedx(entry):
 	word_add = split_word[0]
 
 	for i in range (1, int(n)):
-		url += word_add + "+"+split_word[i]
+		word_add = word_add + "+"+split_word[i]
 
-	return url
+	return url+word_add
 
 def getFirstLink(URLstr):
 	'''
