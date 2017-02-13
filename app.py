@@ -4,7 +4,7 @@ import json
 
 import requests
 from flask import Flask, request
-from functions import *
+#rom functions import *
 
 app = Flask(__name__)
 
@@ -44,9 +44,9 @@ def webhook():
                     message_text = messaging_event["message"][
                         "text"]  # the message's text
                     
-                    searchURL = SearchTedx(message_text) ##constructing search URL
+                    # searchURL = SearchTedx(message_text) ##constructing search URL
 
-                    send_message(sender_id, searchURL) ##sending back search results page
+                    send_message(sender_id, message_text) ##sending back search results page
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
