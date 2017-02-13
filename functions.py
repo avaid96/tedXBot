@@ -40,6 +40,8 @@ def getFirstLink(URLstr):
 	page = urllib2.urlopen(URLstr).read()
 	soup = BeautifulSoup(page,"html.parser")
 	x=soup.findAll("a","visible-url-link")
+	if len(x) < 1:
+		return "No videos found"
 	randomVid = random.choice(x)
 	return randomVid.text #do .get('href') if you only want "/talks/..."
 	

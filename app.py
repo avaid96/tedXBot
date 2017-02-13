@@ -33,7 +33,6 @@ def webhook():
 
         for entry in data["entry"]:
             for messaging_event in entry["messaging"]:
-
                 if messaging_event.get("message"):  # someone sent us a message
 
                     # the facebook ID of the person sending you the message
