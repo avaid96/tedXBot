@@ -19,7 +19,6 @@ def getfirsttalk(page):
 def SearchTedx(entry):
 	'''input will be a search for a video and returns the url for the list of all 
 	based on input'''
-	keyword = raw_input("Search Video: ")
 	url = "https://www.ted.com/search?cat=talks&per_page=12&q="
 	word_add = ""
 	split_word = entry.split()
