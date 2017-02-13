@@ -45,7 +45,8 @@ def webhook():
                         "text"]  # the message's text
 
                     searchLink=SearchTedx(message_text)
-                    send_message(sender_id, searchLink)
+                    vidLink=getFirstLink(searchLink)
+                    send_message(sender_id, vidLink)
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
