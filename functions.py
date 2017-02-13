@@ -17,9 +17,9 @@ def getfirsttalk(page):
     return parsedlinks[0]
 
 def SearchTedx(entry):
-	'''input will be a search for a video and returns the url for the list of all 
+	'''input will be a search for a video and returns the url for the list of all
 	based on input'''
-	keyword = raw_input("Search Video: ")
+
 	url = "https://www.ted.com/search?cat=talks&per_page=12&q="
 	word_add = ""
 	split_word = entry.split()
@@ -29,7 +29,7 @@ def SearchTedx(entry):
 	for i in range (1, int(n)):
 		word_add = word_add + "+"+split_word[i]
 
-	return word_add
+	return url+word_add
 
 def getFirstLink(URLstr):
 	'''
@@ -40,4 +40,3 @@ def getFirstLink(URLstr):
 	soup = BeautifulSoup(page,"html.parser")
 	x=soup.findAll("a","visible-url-link")
 	return x[0].text #do x[0].get('href') if you only want "/talks/..."
-	
