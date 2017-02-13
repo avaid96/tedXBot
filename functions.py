@@ -3,6 +3,7 @@ import re
 from bs4 import BeautifulSoup
 from pprint import pprint
 import urllib2
+import random
 
 
 def getfirsttalk(page):
@@ -39,4 +40,6 @@ def getFirstLink(URLstr):
 	page = urllib2.urlopen(URLstr).read()
 	soup = BeautifulSoup(page,"html.parser")
 	x=soup.findAll("a","visible-url-link")
-	return x[0].text #do x[0].get('href') if you only want "/talks/..."
+	randomVid = random.choice(x)
+	return randomVid.text #do .get('href') if you only want "/talks/..."
+	
