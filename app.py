@@ -4,7 +4,7 @@ import json
 
 import requests
 from flask import Flask, request
-#rom functions import *
+from functions import *
 
 app = Flask(__name__)
 
