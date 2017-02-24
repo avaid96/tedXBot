@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from pprint import pprint
 import urllib2
 import os
-
+import sys
 
 def getfirsttalk(page):
     '''
@@ -46,10 +46,10 @@ def getUserInfo(userID):
     '''
     Return user information given the user's ID
     '''
-    params = {
+    param = {
         "access_token": os.environ["PAGE_ACCESS_TOKEN"]
     }
-
-	x=requests.get("https://graph.facebook.com/v2.6/me",params=params)
+    url="https://graph.facebook.com/v2.6/"+userID
+	x=requests.get(url,params=param)
 	data=x.json()	#convert to json format
 	return data	   #return all fields of the response
