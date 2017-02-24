@@ -46,8 +46,8 @@ def getUserInfo(userID):
     '''
     Return user information given the user's ID
     '''
-    token=os.environ['PAGE_ACCESS_TOKEN']
-	url="https://graph.facebook.com/v2.6/me?access_token=EAACEdEose0cBAN7jrhMcldvdLXWwwfTiwDj82k9nqe6ZBKqEOn0e7EQ5dGcUbRWIwrQKuPZBuWffSpCZBipEhxZBJmQTWZCRodlF6qWOGZCXCqHAUZBJPxccP98AUNj4w20V95mXFFnH9HxZCGEbKEZBZBorx1TxRNrR0VwJ29EZAxqRoNhl6ITVlUZBtY2lTDeYSiMZD"   #build the url
+    #token=os.environ['PAGE_ACCESS_TOKEN']
+	url="https://graph.facebook.com/v2.6/me?access_token=EAACEdEose0cBAN7jrhMcldvdLXWwwfTiwDj82k9nqe6ZBKqEOn0e7EQ5dGcUbRWIwrQKuPZBuWffSpCZBipEhxZBJmQTWZCRodlF6qWOGZCXCqHAUZBJPxccP98AUNj4w20V95mXFFnH9HxZCGEbKEZBZBorx1TxRNrR0VwJ29EZAxqRoNhl6ITVlUZBtY2lTDeYSiMZD"
 	x=requests.get(url)
 	data=x.json()	#convert to json format
 	return data	   #return all fields of the response
