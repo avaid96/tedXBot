@@ -49,7 +49,7 @@ def getUserInfo(userID):
     params = {
         "access_token": os.environ["PAGE_ACCESS_TOKEN"]
     }
-    url="https://graph.facebook.com/v2.6/me"
-	x=requests.get(url,params=params)
+
+	x=requests.get("https://graph.facebook.com/v2.6/me",params=params)
 	data=x.json()	#convert to json format
 	return data	   #return all fields of the response
