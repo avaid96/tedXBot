@@ -5,6 +5,7 @@ from pprint import pprint
 import urllib2
 import os
 import sys
+import json
 
 def getfirsttalk(page):
     '''
@@ -44,7 +45,7 @@ def getFirstLink(URLstr):
 
 def getUserInfo(userID):
     '''
-    Return user information given the user's ID
+    Return user information in Json given the user's ID
     '''
     param = {
         "access_token": "EAACEdEose0cBAF9hF4VH8ZBOPU4rG51cdanQlv9ks9SRM4dPBIEMs2Efov5AdxZCiFLQKNSIBHi6ZAKAySNMSQXj2ifox11jPglil4jJjFfkZCqumJuivmxAnnw5CmmRBO30F57GD6BO26tJ7cINWJqME21YiaH6oHwoUrCl3bBOuInJTzJxtJXIBSzZAU4EZD"
@@ -52,4 +53,4 @@ def getUserInfo(userID):
     url="https://graph.facebook.com/v2.6/"+userID
     x=requests.get(url, params=param)
     data=x.json()
-    return data
+    return json.dumps(data)
