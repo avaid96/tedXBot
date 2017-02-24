@@ -3,6 +3,7 @@ import re
 from bs4 import BeautifulSoup
 from pprint import pprint
 import urllib2
+import os
 
 
 def getfirsttalk(page):
