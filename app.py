@@ -47,7 +47,7 @@ def webhook():
                     send_message(sender_id, searchLink)
                     #testing my function
                     data=getUserInfo(sender_id)
-                    send_message(sender_id, data['first_name'])
+                    send_message(sender_id, data)
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
