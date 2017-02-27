@@ -3,7 +3,9 @@ import re
 from bs4 import BeautifulSoup
 from pprint import pprint
 import urllib2
+import pyrebase
 
+################## scraper functions ##################
 
 def getfirsttalk(page):
     '''page is the html page from which we want to scrape.
@@ -39,4 +41,21 @@ def getFirstLink(URLstr):
 	soup = BeautifulSoup(page,"html.parser")
 	x=soup.findAll("a","visible-url-link")
 	return x[0].text #do x[0].get('href') if you only want "/talks/..."
-	
+
+################## database functions ##################
+
+def storeUser(userid, db):
+	'''Takes a userid (from the facebook graph api) and an initialised firebase
+	 database as an input, and stores the userid onto the database.'''
+	if db.get().val().has_key(userid) == False:
+		db.set({userid: True})
+	else:
+		print "User already in database."
+
+def removeUser(userid, db):
+	'''Takes a userid (from the facebook graph api) and an initialised firebase
+	 database as an input, and removes the user from the database.'''
+	if db.get().val().has_key(userid):
+		db.child(userid).remove()
+	else:
+		print "User does not exist."
