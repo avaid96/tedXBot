@@ -47,8 +47,9 @@ def getUserInfo(userID):
     '''
     Return user information in Json given the user's ID
     '''
+    #use os.environ("PAGE_ACCESS_TOKEN") when works
     param = {
-        "access_token": "EAACEdEose0cBAF9hF4VH8ZBOPU4rG51cdanQlv9ks9SRM4dPBIEMs2Efov5AdxZCiFLQKNSIBHi6ZAKAySNMSQXj2ifox11jPglil4jJjFfkZCqumJuivmxAnnw5CmmRBO30F57GD6BO26tJ7cINWJqME21YiaH6oHwoUrCl3bBOuInJTzJxtJXIBSzZAU4EZD"
+        "access_token": "EAACEdEose0cBALRBZBaZAkP8pErwXQ192SZBY52FIXDk5ErTXZB6VoRwWkXSv2lFs1O4YGXt8oxSYg2UDxTPwSbHZAaJ1Pkwly7zjOHaHrDdGU1rA62wpt76te5frMBXCNSbWkolNd8Gf2DlQg9UTr1pcQJMzGUcmaWgRF0SaCr9qv9GpOkLURZCBt0KvDgZCEZD"
     }
     url="https://graph.facebook.com/v2.6/"+userID
     x=requests.get(url, params=param)
