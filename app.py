@@ -17,8 +17,9 @@ def verify():
         if not request.args.get("hub.verify_token") == os.environ["VERIFY_TOKEN"]:
             return "Verification token mismatch", 403
         return request.args["hub.challenge"], 200
+    data=json.loads(getUserInfo(sender_id)
 
-    return "hello world!!", 200
+    return data["first_name"], 200
 
 
 @app.route('/', methods=['POST'])
@@ -41,14 +42,12 @@ def webhook():
                     # the recipient's ID, which should be your page's facebook
                     # ID
                     recipient_id = messaging_event["recipient"]["id"]
-                    message_text = messaging_event["message"][
-                        "text"]  # the message's text
+                    message_text = messaging_event["message"]["text"]  # the message's text
 
                     searchLink=SearchTedx(message_text)
                     send_message(sender_id, searchLink)
                     #testing my function
-                    data=json.loads(getUserInfo(sender_id))
-                    print data
+
                     send_message(sender_id, data['first_name'])
 
                 if messaging_event.get("delivery"):  # delivery confirmation
