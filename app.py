@@ -17,9 +17,8 @@ def verify():
         if not request.args.get("hub.verify_token") == os.environ["VERIFY_TOKEN"]:
             return "Verification token mismatch", 403
         return request.args["hub.challenge"], 200
-    data=json.loads(getUserInfo(sender_id)
-
-    return data["first_name"], 200
+    #data=getUserInfo("1197030080411519")
+    return "Hello World", 200
 
 
 @app.route('/', methods=['POST'])
@@ -47,7 +46,7 @@ def webhook():
                     searchLink=SearchTedx(message_text)
                     send_message(sender_id, searchLink)
                     #testing my function
-
+                    data=getUserInfo(sender_id)
                     send_message(sender_id, data['first_name'])
 
                 if messaging_event.get("delivery"):  # delivery confirmation
