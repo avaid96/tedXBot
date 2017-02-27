@@ -41,14 +41,13 @@ def webhook():
                     # the recipient's ID, which should be your page's facebook
                     # ID
                     recipient_id = messaging_event["recipient"]["id"]
-                    message_text = messaging_event["message"][
-                        "text"]  # the message's text
+                    message_text = messaging_event["message"]["text"]  # the message's text
 
                     searchLink=SearchTedx(message_text)
                     send_message(sender_id, searchLink)
                     #testing my function
                     data=json.loads(getUserInfo(sender_id))
-                    print data
+                    log(data)
                     send_message(sender_id, data['first_name'])
 
                 if messaging_event.get("delivery"):  # delivery confirmation
