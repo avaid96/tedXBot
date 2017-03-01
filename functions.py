@@ -7,6 +7,9 @@ import random
 import os
 import sys
 import json
+import pyrebase
+
+################## scraper functions ##################
 
 def getfirsttalk(page):
     '''
@@ -59,3 +62,23 @@ def getUserInfo(userID):
     x=requests.get(url, params=param)
     data=x.json()
     return data
+
+################## database functions ##################
+
+#Currently dangling
+def storeUser(userid, db):
+	'''Takes a userid (from the facebook graph api) and an initialised firebase
+	 database as an input, and stores the userid onto the database.'''
+	if db.get().val().has_key(userid) == False:
+		db.set({userid: True})
+	else:
+		print "User already in database."
+
+#Currently dangling
+def removeUser(userid, db):
+	'''Takes a userid (from the facebook graph api) and an initialised firebase
+	 database as an input, and removes the user from the database.'''
+	if db.get().val().has_key(userid):
+		db.child(userid).remove()
+	else:
+		print "User does not exist."
