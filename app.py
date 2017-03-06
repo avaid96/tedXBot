@@ -8,12 +8,12 @@ from flask import Flask, request
 from functions import *
 import pyrebase
 
-# config = { #our config for our firebase app
-#     "apiKey": os.environ['FIREBASE_API_KEY'],
-#     "authDomain": os.environ['FIREBASE_AUTHDOMAIN'],
-#     "databaseURL": os.environ['FIREBASE_DATABASE_URL'],
-#     "storageBucket": os.environ['FIREBASE_STORAGE_BUCKET']
-# }
+config = { #our config for our firebase app
+    "apiKey": os.environ['FIREBASE_API_KEY'],
+    "authDomain": os.environ['FIREBASE_AUTHDOMAIN'],
+    "databaseURL": os.environ['FIREBASE_DATABASE_URL'],
+    "storageBucket": os.environ['FIREBASE_STORAGE_BUCKET']
+}
 
 firebase = pyrebase.initialize_app(config) #initializes our firebase app, that can have database, auth, messaging etc.
 
