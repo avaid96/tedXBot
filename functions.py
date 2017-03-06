@@ -65,20 +65,43 @@ def getUserInfo(userID):
 
 ################## database functions ##################
 
-#Currently dangling
-def storeUser(userid, db):
-	'''Takes a userid (from the facebook graph api) and an initialised firebase
-	 database as an input, and stores the userid onto the database.'''
-	if db.get().val().has_key(userid) == False:
-		db.set({userid: True})
+def storeUser(userid, db, dbuser):
+	'''Takes a userid (from the facebook graph api), an initialised firebase
+	 database and an authenticated firebase user as an input, and stores the userid onto the database.'''
+	if db.get(dbuser['idToken']).val().has_key(userid) == False:
+		db.child(userid).set(True, dbuser['idToken'])
 	else:
 		print "User already in database."
 
-#Currently dangling
-def removeUser(userid, db):
-	'''Takes a userid (from the facebook graph api) and an initialised firebase
-	 database as an input, and removes the user from the database.'''
-	if db.get().val().has_key(userid):
-		db.child(userid).remove()
+def removeUser(userid, db, dbuser):
+	'''Takes a userid (from the facebook graph api) an initialised firebase
+	 database and an authenticated firebase user as an input, and removes the user from the database.'''
+	if db.get(dbuser['idToken']).val().has_key(userid):
+		db.child(userid).remove(dbuser['idToken'])
 	else:
 		print "User does not exist."
+
+def refreshUserToken(auth, dbuser):
+	'''Firebase user idTokens expire in 1 hour. This function refreshes our token and returns the dbuser with refreshed token.
+	Call this function before calling a removeUser() or storeUser() function to ensure our dbtoken never expires.
+	Make sure you assign the return value to the global variable 'user' in app.py.
+	example:
+	
+	user = refreshUserToken(auth, user)
+	storeUser(userid, db, user)
+
+	'''
+	dbuser = auth.refresh(dbuser['refreshToken'])
+	return dbuser
+
+def getAllUsers(db, dbuser):
+	'''Returns all users from Firebase database.'''
+	allusers =  db.get(dbuser['idToken']).val()
+	allusers.pop('dummy', None)
+	return allusers
+
+def getUser(userid, db, dbuser):
+	'''Get particular user from firebase database.'''
+	allusers = db.get(dbuser['idToken']).val()
+	return allusers[userid]
+
