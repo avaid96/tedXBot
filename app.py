@@ -15,8 +15,11 @@ config = { #our config for our firebase app
 }
 
 firebase = pyrebase.initialize_app(config) #initializes our firebase app, that can have database, auth, messaging etc.
+
+auth = firebase.auth() #reference to the firebase app's authentication service
+user = auth.sign_in_with_email_and_password(os.environ['FIREBASE_AUTH_EMAIL'], os.environ['FIREBASE_AUTH_PASSWORD']) # log the user of the database in
+
 db = firebase.database() #grabbing the database in our firebase app
-db.set({"dummy":True}) #making dummy user to prevent errors. This will always stay in the database.
 
 app = Flask(__name__)
 
