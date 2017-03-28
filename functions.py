@@ -68,23 +68,22 @@ def getUserInfo(userID):
 ################## database functions ##################
 
 def storeUser(userid, db, dbuser):
-	'''Takes a userid (from the facebook graph api), an initialised firebase
-	 database and an authenticated firebase user as an input, and stores the userid onto the database.
-     Returns true if user is already in database; false otherwise
-     '''
-	if db.get(dbuser['idToken']).val().has_key(userid) == False:
-		db.child(userid).set(True, dbuser['idToken'])
-        return False
-	else:
-		return True
+    '''Takes a userid (from the facebook graph api), an initialised firebase
+    database and an authenticated firebase user as an input, and stores the userid onto the database.
+    Returns true if user is already in database; false otherwise'''
+    b=True
+    if db.get(dbuser['idToken']).val().has_key(userid) == False:
+        db.child(userid).set(True, dbuser['idToken'])
+        b=False
+    return b
 
 def removeUser(userid, db, dbuser):
-	'''Takes a userid (from the facebook graph api) an initialised firebase
-	 database and an authenticated firebase user as an input, and removes the user from the database.'''
-	if db.get(dbuser['idToken']).val().has_key(userid):
-		db.child(userid).remove(dbuser['idToken'])
-	else:
-		print "User does not exist."
+    '''Takes a userid (from the facebook graph api) an initialised firebase
+    database and an authenticated firebase user as an input, and removes the user from the database.'''
+    if db.get(dbuser['idToken']).val().has_key(userid):
+        db.child(userid).remove(dbuser['idToken'])
+    else:
+        print "User does not exist."
 
 def refreshUserToken(auth, dbuser):
 	'''Firebase user idTokens expire in 1 hour. This function refreshes our token and returns the dbuser with refreshed token.

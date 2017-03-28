@@ -73,7 +73,6 @@ def webhook():
                         y=storeUser(recipient_id,db,user)
                         if not y:    #if new user
                             send_message(sender_id, "Welcome! Thanks for subscribing to TEDx")
-
                         send_message(sender_id, vidLink)
 
                     userData=getUserInfo(sender_id)
