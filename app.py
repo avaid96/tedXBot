@@ -55,14 +55,17 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]
 
                     message_text = messaging_event["message"]["text"]  # the message's text
-                    searchLink=SearchTedx(message_text)
-                    vidLink=getFirstLink(searchLink)
-                    #get sender info
-                    userInfo = getUserInfo(str(recipient_id))
-                    #store user in firebase
-                    storeUser(recipient_id,db,user)
+                    if message_text=="unsubscribe":
+                        send_message(sender_id, "done")
+                    else:
+                        searchLink=SearchTedx(message_text)
+                        vidLink=getFirstLink(searchLink)
+                        #get sender info
+                        userInfo = getUserInfo(str(recipient_id))
+                        #store user in firebase
+                        storeUser(recipient_id,db,user)
 
-                    send_message(sender_id, vidLink)
+                        send_message(sender_id, vidLink)
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
