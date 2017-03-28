@@ -49,7 +49,7 @@ def getFirstLink(URLstr):
 		return "No videos found"
 	randomVid = random.choice(x)
 	return randomVid.text #do .get('href') if you only want "/talks/..."
-	
+
 ################## user info functions ##################
 
 #Currently dangling
@@ -69,11 +69,14 @@ def getUserInfo(userID):
 
 def storeUser(userid, db, dbuser):
 	'''Takes a userid (from the facebook graph api), an initialised firebase
-	 database and an authenticated firebase user as an input, and stores the userid onto the database.'''
+	 database and an authenticated firebase user as an input, and stores the userid onto the database.
+     Returns true if user is already in database; false otherwise
+     '''
 	if db.get(dbuser['idToken']).val().has_key(userid) == False:
 		db.child(userid).set(True, dbuser['idToken'])
+        return False
 	else:
-		print "User already in database."
+		return True
 
 def removeUser(userid, db, dbuser):
 	'''Takes a userid (from the facebook graph api) an initialised firebase
@@ -88,7 +91,7 @@ def refreshUserToken(auth, dbuser):
 	Call this function before calling a removeUser() or storeUser() function to ensure our dbtoken never expires.
 	Make sure you assign the return value to the global variable 'user' in app.py.
 	example:
-	
+
 	user = refreshUserToken(auth, user)
 	storeUser(userid, db, user)
 
@@ -106,4 +109,3 @@ def getUser(userid, db, dbuser):
 	'''Get particular user from firebase database.'''
 	allusers = db.get(dbuser['idToken']).val()
 	return allusers[userid]
-
