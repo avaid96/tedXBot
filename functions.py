@@ -50,6 +50,8 @@ def getFirstLink(URLstr):
 	randomVid = random.choice(x)
 	return randomVid.text #do .get('href') if you only want "/talks/..."
 	
+################## user info functions ##################
+
 #Currently dangling
 def getUserInfo(userID):
     '''

@@ -5,7 +5,6 @@ from functions import *
 
 import requests
 from flask import Flask, request
-from functions import *
 import pyrebase
 
 config = { #our config for our firebase app
@@ -52,13 +51,21 @@ def webhook():
 
                     # the facebook ID of the person sending you the message
                     sender_id = messaging_event["sender"]["id"]
-                    # the recipient's ID, which should be your page's facebook
-                    # ID
+                    # the recipient's ID, which should be your page's facebook ID
                     recipient_id = messaging_event["recipient"]["id"]
+
                     message_text = messaging_event["message"]["text"]  # the message's text
-                    searchLink=SearchTedx(message_text)
-                    vidLink=getFirstLink(searchLink)
-                    send_message(sender_id, vidLink)
+                    if message_text=="unsubscribe":
+                        send_message(sender_id, "done")
+                    else:
+                        searchLink=SearchTedx(message_text)
+                        vidLink=getFirstLink(searchLink)
+                        #get sender info
+                        userInfo = getUserInfo(str(recipient_id))
+                        #store user in firebase
+                        storeUser(recipient_id,db,user)
+
+                        send_message(sender_id, vidLink)
 
                     userData=getUserInfo(sender_id)
                     log("This is sender_id  "+sender_id)
