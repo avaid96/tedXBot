@@ -62,18 +62,29 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]
 
                     message_text = messaging_event["message"]["text"]  # the message's text
-                    if message_text=="unsubscribe":
-                        send_message(sender_id, "done")
+                    if message_text.lower()=="unsubscribe":
+                        removeUser(recipient_id,db,user)
+                        send_message(sender_id, "Successfully unsubscribed")
+                    elif message_text.lower()=="subscribe":
+                        x=storeUser(recipient_id,db,user)
+                        if x:    #if user is already in database
+                            send_message(sender_id, "You are already subscribed")
+                        else:
+                            send_message(sender_id, "Welcome! Thanks for subscribing to TEDx")
                     else:
                         searchLink=SearchTedx(message_text)
                         vidLink=getFirstLink(searchLink)
                         #get sender info
                         userInfo = getUserInfo(str(recipient_id))
                         #store user in firebase
-                        storeUser(recipient_id,db,user)
-
+                        y=storeUser(recipient_id,db,user)
+                        if not y:    #if new user
+                            send_message(sender_id, "Welcome! Thanks for subscribing to TEDx")
                         send_message(sender_id, vidLink)
 
+                    userData=getUserInfo(sender_id)
+                    log("This is sender_id  "+sender_id)
+                    log(userData)
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
 
