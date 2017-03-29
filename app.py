@@ -26,12 +26,11 @@ app = Flask(__name__)
 
 @app.route('/blast', methods=['GET'])
 def blastmessage():
-    global user
     formdata = request.args
     users = getAllUsers(db, user)
     del users['1857053561207408']
-    for user in users:
-        send_message(user, formdata['message'])
+    for eachuser in users:
+        send_message(eachuser, formdata['message'])
     return 'OK', 200
 
 @app.route('/', methods=['GET'])
@@ -46,7 +45,6 @@ def verify():
 
 @app.route('/', methods=['POST'])
 def webhook():
-    global user
     # endpoint for processing incoming messaging events
 
     data = request.get_json()
