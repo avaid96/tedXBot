@@ -48,6 +48,5 @@ def log(message):  # simple wrapper for logging to stdout on heroku
     sys.stdout.flush()
 
 users = getAllUsers(db, user)
-del users['1857053561207408']
 for user in users:
     send_message(user, "abc")

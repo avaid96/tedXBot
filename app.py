@@ -28,7 +28,6 @@ app = Flask(__name__)
 def blastmessage():
     formdata = request.args
     users = getAllUsers(db, user)
-    del users['1857053561207408']
     for eachuser in users:
         send_message(eachuser, formdata['message'])
     return 'OK', 200
