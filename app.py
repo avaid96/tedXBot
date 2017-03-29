@@ -27,10 +27,13 @@ app = Flask(__name__)
 @app.route('/blast', methods=['GET'])
 def blastmessage():
     formdata = request.args
-    users = getAllUsers(db, user)
-    for eachuser in users:
-        send_message(eachuser, formdata['message'])
-    return 'OK', 200
+    if formdata['token']==os.environ["VERIFY_TOKEN"]:
+        users = getAllUsers(db, user)
+        for eachuser in users:
+            send_message(eachuser, formdata['message'])
+        return 'Sent the message', 200
+    else:
+        return 'Wrong token', 200
 
 @app.route('/', methods=['GET'])
 def verify():
