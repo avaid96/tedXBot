@@ -47,6 +47,8 @@ def log(message):  # simple wrapper for logging to stdout on heroku
     print str(message)
     sys.stdout.flush()
 
+from functions import getFirstLink
+urlstring = "Video of the day: "+getFirstLink("https://www.ted.com/search?cat=talks&per_page=12&q=talks")
 users = getAllUsers(db, user)
 for user in users:
-    send_message(user, "abc")
+    send_message(user, urlstring)
